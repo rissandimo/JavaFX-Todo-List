@@ -9,27 +9,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Task;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class TaskController implements Initializable
+public class TaskController
 {
-
-    public TaskController()
-    {
-        tasksList.add(new Task("item 1", "Todo soon"));
-    }
-
-    public ObservableList<Task> getTasksList()
-    {
-        return tasksList;
-    }
 
     @FXML
     private TableView<Task> tableView;
-
-    @FXML
-    private ObservableList<Task> tasksList = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<Task, String> titleColumn;
@@ -37,18 +22,20 @@ public class TaskController implements Initializable
     @FXML
     private TableColumn<Task, String> categoryColumn;
 
-    @FXML
-    private void setColumnCellFactories()
+    public TaskController()
     {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+
     }
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources)
+    public void loadData(ObservableList<Task> observableList)
     {
-        setColumnCellFactories();
-        tableView.setItems(tasksList);
+        tableView.setItems(observableList);
+    }
+
+    @FXML
+    private void initialize()
+    {
+        titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
+        categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
     }
 }

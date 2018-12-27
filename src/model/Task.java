@@ -4,12 +4,24 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Task
 {
-    private SimpleStringProperty title;
-    private SimpleStringProperty category;
+    private final SimpleStringProperty title;
+    private final SimpleStringProperty category;
+
+    public Task(String title, String category)
+    {
+        this.title = new SimpleStringProperty(title);
+        this.category = new SimpleStringProperty(category);
+    }
+
 
     public String getTitle()
     {
         return title.get();
+    }
+
+    public SimpleStringProperty titleProperty()
+    {
+        return title;
     }
 
     public void setTitle(String title)
@@ -22,15 +34,14 @@ public class Task
         return category.get();
     }
 
+    public SimpleStringProperty categoryProperty()
+    {
+        return category;
+    }
+
     public void setCategory(String category)
     {
         this.category.set(category);
-    }
-
-    public Task(String title, String category)
-    {
-        this.title = new SimpleStringProperty(title);
-        this.category = new SimpleStringProperty(category);
     }
 
     //PRIORITIES
