@@ -3,13 +3,13 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Task;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Main extends Application
 {
@@ -17,14 +17,13 @@ public class Main extends Application
 
     private Stage primaryStage;
 
-    private AnchorPane rootLayout;
 
     public Main()
     {
-        taskObservableList.add(new Task("Task 1", "Some data"));
+        taskObservableList.add(new Task("Task 1", "Some data", Task.NO_PRIORITY, LocalDate.of(2018, 2, 4)));
     }
 
-    public ObservableList<Task> getTaskObservableList()
+    private ObservableList<Task> getTaskObservableList()
     {
         return taskObservableList;
     }
@@ -35,48 +34,33 @@ public class Main extends Application
         this.primaryStage = primaryStage;
 
         loadMainView();
-
-        loadData();
     }
 
-    public void loadMainView()
+    private void loadMainView()
     {
         try
         {
             //set scene
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Main.class.getResource("ui/mainWindow.fxml"));
-            rootLayout = (AnchorPane) fxmlLoader.load();
+            AnchorPane rootLayout = fxmlLoader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setTitle("Todo List");
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            // load data
             TaskController taskController = fxmlLoader.getController();
             taskController.loadData(getTaskObservableList());
 
             }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
     }
 
-    public void loadData()
+    public static void main(String[] args)
     {
-        try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/mainWindow.fxml"));
-            Parent parent = fxmlLoader.load();
-
-        TaskController taskController = (TaskController) fxmlLoader.getController();
-        taskController.loadData(getTaskObservableList());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
         launch(args);
     }
 }
