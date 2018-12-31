@@ -11,29 +11,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TaskController">
-   <children>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rissandimo.controllers.TaskController">
       <HBox layoutX="230.0" layoutY="54.0" prefHeight="25.0" prefWidth="719.0">
-         <children>
             <FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="33.0" />
             <TextField prefHeight="26.0" prefWidth="689.0" promptText="Search for task" />
-         </children>
       </HBox>
       <TableView fx:id="tableView" layoutX="223.0" layoutY="87.0" prefHeight="609.0" prefWidth="734.0">
         <columns>
           <TableColumn fx:id="titleColumn" prefWidth="193.0" text="Title" />
             <TableColumn fx:id="categoryColumn" prefWidth="188.0" text="Category" />
+            <TableColumn fx:id="priorityColumn" prefWidth="193.0" text="Priority" />
+            <TableColumn fx:id="dueDateColumn" prefWidth="193.0" text="Due Date" />
         </columns>
       </TableView>
       <ButtonBar layoutX="450.0" layoutY="696.0" prefHeight="40.0" prefWidth="279.0">
         <buttons>
-          <Button mnemonicParsing="false" text="New model.Task" />
-            <Button mnemonicParsing="false" text="Edit model.Task" />
-            <Button mnemonicParsing="false" text="Delete model.Task" />
+          <Button mnemonicParsing="false" onAction="#handleNewTask" text="New Task" />
+            <Button mnemonicParsing="false" text="Edit Task" />
+            <Button mnemonicParsing="false" text="Delete Task" />
         </buttons>
       </ButtonBar>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="87.0" prefHeight="598.0" prefWidth="204.0">
-         <children>
             <Label prefHeight="49.0" prefWidth="204.0" text="All Tasks">
                <graphic>
                   <FontAwesomeIconView glyphName="TASKS" size="25" />
@@ -54,7 +52,10 @@
                   <FontAwesomeIconView glyphName="BELL" size="25" />
                </graphic>
             </Label>
-         </children>
+            <Label prefHeight="51.0" prefWidth="204.0" text="Due Today">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" size="25" />
+               </graphic>
+            </Label>
       </VBox>
-   </children>
 </AnchorPane>
