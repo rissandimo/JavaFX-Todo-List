@@ -27,6 +27,11 @@ public class Task
         this.dueDate = new SimpleObjectProperty<>(LocalDate.of(2018, 5, 6));
     }
 
+    public Task()
+    {
+        this(null, null, 0, null);
+    }
+
     public String getTitle()
     {
         return title.get();
