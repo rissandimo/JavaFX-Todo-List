@@ -1,27 +1,15 @@
 package com.rissandimo.controllers;
 
-import javafx.collections.ObservableList;
+import com.rissandimo.MainApplication;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 import com.rissandimo.model.Task;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Optional;
 
 
 public class TaskController
 {
-
-    @FXML
-    private AnchorPane anchorPane;
 
     @FXML
     private TableView<Task> tableView;
@@ -38,11 +26,16 @@ public class TaskController
     @FXML
     private TableColumn<Task, LocalDate> dueDateColumn;
 
+    private MainApplication mainApplication;
 
-    public void loadData(ObservableList<Task> observableList)
+
+    public void giveAccessToTaskController(MainApplication mainApplication)
     {
-        tableView.setItems(observableList);
+        this.mainApplication = mainApplication;
+
+        tableView.setItems(mainApplication.getTaskObservableList());
     }
+
 
     @FXML
     private void initialize()
@@ -56,24 +49,19 @@ public class TaskController
     @FXML
     private void handleNewTask()
     {
-        try
-        {
-            //load new task window
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../ui/newTask.fxml"));
-            AnchorPane newTaskScene = fxmlLoader.load();
-            //load new stage and set task window in stage
 
-            Stage newTaskStage = new Stage();
-            newTaskStage.setScene(new Scene(newTaskScene));
-            newTaskStage.setTitle("Add new task");
-            newTaskStage.showAndWait();
-        }
-        catch(IOException e)
+        Task newTask = new Task();
+        boolean okClicked = mainApplication.showNewTaskDialog(newTask);
+        if(okClicked)
         {
-            e.printStackTrace();
+        mainApplication.getTaskObservableList().add(newTask);
+
         }
 
 
+        // create a new newTask
+        // call main.showNewTaskDialog and pass new newTask -> return true if it went ok
+        //if returns true -> call main.getObservableList and pass it new newTask
     }
+
 }
