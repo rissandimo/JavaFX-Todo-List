@@ -1,6 +1,7 @@
 package com.rissandimo.controllers;
 
 import com.rissandimo.MainApplication;
+import com.rissandimo.util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -49,7 +50,6 @@ public class TaskController
     @FXML
     private void handleNewTask()
     {
-
         Task newTask = new Task();
         boolean okClicked = mainApplication.showNewTaskDialog(newTask);
         if(okClicked)
@@ -57,11 +57,22 @@ public class TaskController
         mainApplication.getTaskObservableList().add(newTask);
 
         }
+    }
 
-
-        // create a new newTask
-        // call main.showNewTaskDialog and pass new newTask -> return true if it went ok
-        //if returns true -> call main.getObservableList and pass it new newTask
+    @FXML
+    private void handleEditTask()
+    {
+        try
+        {
+            Task selectedTask = tableView.getSelectionModel().getSelectedItem();
+            mainApplication.showNewTaskDialog(selectedTask);
+        }
+        catch(NullPointerException e)
+        {
+            AlertUtil.showWarning("No task chosen", "Please select a task to edit");
+        }
+        //TODO - reload table view to show edited task
     }
 
 }
+
