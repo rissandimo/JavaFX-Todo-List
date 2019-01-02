@@ -83,9 +83,12 @@ public class NewTaskController
 
             taskStage.close();
         }
-
     }
 
+    /**
+     * Loads a new or pre-existing task to be edited
+     * @param task new or pre-existing task to be displayed
+     */
     public void setTaskDetails(Task task)
     {
         this.task = task;
