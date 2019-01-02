@@ -10,27 +10,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class MainApplication extends Application
 {
 
-    public MainApplication()
-    {
-        taskObservableList.add(new Task("Task 1", "Some data", Task.NO_PRIORITY, LocalDate.of(2018, 2, 4)));
-    }
+    private Stage primaryStage;
 
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
-
 
     public ObservableList<Task> getTaskObservableList()
     {
         return taskObservableList;
     }
-
-    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage)
@@ -38,7 +30,6 @@ public class MainApplication extends Application
         this.primaryStage = primaryStage;
 
         loadMainView();
-
     }
 
     /**
@@ -68,6 +59,13 @@ public class MainApplication extends Application
             }
     }
 
+    /**
+     * Loads the newTask window and places it in a new stage
+     * Gets the new task info from the user and returns it to the caller in TaskController
+     *
+     * @param task new task to be sent to NewTaskController
+     * @return true if the user click the OK button, false otherwise
+     */
     public boolean showNewTaskDialog(Task task)
     {
         try
@@ -77,16 +75,18 @@ public class MainApplication extends Application
             fxmlLoader.setLocation(getClass().getResource("ui/newTask.fxml"));
             AnchorPane newTaskScene = fxmlLoader.load();
 
-            //load new stage and set task window in stage
+            //create a new stage and pass in the task window
             Stage newTaskStage = new Stage();
             newTaskStage.setScene(new Scene(newTaskScene));
             newTaskStage.setTitle("Add new task");
 
-            //get access to new task controller - and load the display for the new task
+            //get access to new task controller
             NewTaskController newTaskController = fxmlLoader.getController();
 
-            //pass this stage to the controller so the controller can close it when the user clicks ok or cancel
+            //pass new stage created to the controller so the controller can close it when the user clicks ok or cancel
             newTaskController.getAccessToNewTaskStage(newTaskStage);
+
+            //display new/empty task in text field area
             newTaskController.setTaskDetails(task);
 
             newTaskStage.showAndWait();//this needs to be called after we send the task to the window or else it task will be null
