@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rissandimo.controllers.TaskController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="737.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rissandimo.controllers.TaskController">
       <HBox layoutX="230.0" layoutY="54.0" prefHeight="25.0" prefWidth="719.0">
             <FontAwesomeIconView glyphName="SEARCH" size="25" wrappingWidth="33.0" />
             <TextField prefHeight="26.0" prefWidth="689.0" promptText="Search for task" />
@@ -27,7 +27,7 @@
       <ButtonBar layoutX="450.0" layoutY="696.0" prefHeight="40.0" prefWidth="279.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleNewTask" text="New Task" />
-            <Button mnemonicParsing="false" text="Edit Task" />
+            <Button mnemonicParsing="false" onAction="#handleEditTask" text="Edit Task" />
             <Button mnemonicParsing="false" text="Delete Task" />
         </buttons>
       </ButtonBar>
