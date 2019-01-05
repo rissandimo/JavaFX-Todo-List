@@ -28,11 +28,11 @@
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleNewTask" text="New Task" />
             <Button mnemonicParsing="false" onAction="#handleEditTask" text="Edit Task" />
-            <Button mnemonicParsing="false" text="Delete Task" />
+            <Button mnemonicParsing="false" onAction="#handleDelete" text="Delete Task" />
         </buttons>
       </ButtonBar>
       <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="87.0" prefHeight="598.0" prefWidth="204.0">
-            <Label prefHeight="49.0" prefWidth="204.0" text="All Tasks">
+            <Label onMouseClicked="#handleShowAllItems" prefHeight="49.0" prefWidth="204.0" text="All Tasks">
                <graphic>
                   <FontAwesomeIconView glyphName="TASKS" size="25" />
                </graphic>
@@ -40,11 +40,6 @@
             <Label prefHeight="51.0" prefWidth="204.0" text="Completed">
                <graphic>
                   <FontAwesomeIconView glyphName="CHECK_SQUARE_ALT" size="25" />
-               </graphic>
-            </Label>
-            <Label prefHeight="51.0" prefWidth="204.0" text="Trash">
-               <graphic>
-                  <FontAwesomeIconView glyphName="TRASH" size="25" />
                </graphic>
             </Label>
             <Label prefHeight="51.0" prefWidth="204.0" text="Priority">
@@ -55,6 +50,11 @@
             <Label prefHeight="51.0" prefWidth="204.0" text="Due Today">
                <graphic>
                   <FontAwesomeIconView glyphName="BELL" size="25" />
+               </graphic>
+            </Label>
+            <Label onMouseClicked="#handleShowDeletedItems" prefHeight="51.0" prefWidth="204.0" text="Trash">
+               <graphic>
+                  <FontAwesomeIconView glyphName="TRASH" size="25" />
                </graphic>
             </Label>
       </VBox>
