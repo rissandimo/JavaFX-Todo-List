@@ -19,9 +19,23 @@ public class MainApplication extends Application
 
     private ObservableList<Task> taskObservableList = FXCollections.observableArrayList();
 
+    private ObservableList<Task> tasksDeletedList = FXCollections.observableArrayList();
+
+    private ObservableList<Task> tasksPriorityList = FXCollections.observableArrayList();
+
     public ObservableList<Task> getTaskObservableList()
     {
         return taskObservableList;
+    }
+
+    public ObservableList<Task> getTasksPriorityList()
+    {
+        return tasksPriorityList;
+    }
+
+    public ObservableList<Task> getTasksDeletedList()
+    {
+        return tasksDeletedList;
     }
 
     @Override

@@ -60,6 +60,8 @@ public class NewTaskController
     private void handleCancel()
     {
         okClicked = false;
+
+        taskStage.close();
     }
 
 

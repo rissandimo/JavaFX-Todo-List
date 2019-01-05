@@ -2,8 +2,6 @@ package com.rissandimo.controllers;
 
 import com.rissandimo.MainApplication;
 import com.rissandimo.util.AlertUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -31,7 +29,7 @@ public class TaskController
 
     private MainApplication mainApplication;
 
-    private ObservableList<Task> tasksDeletedList = FXCollections.observableArrayList();
+    private static final int HIGH_PRIORITY = 3;
 
 
     public void giveAccessToTaskController(MainApplication mainApplication)
@@ -55,10 +53,19 @@ public class TaskController
     private void handleNewTask()
     {
         Task newTask = new Task();
+
         boolean okClicked = mainApplication.showNewTaskDialog(newTask);
         if(okClicked)
         {
-        mainApplication.getTaskObservableList().add(newTask);
+            if(newTask.getPriority() == HIGH_PRIORITY)
+            {
+                mainApplication.getTasksPriorityList().add(newTask);
+                mainApplication.getTaskObservableList().add(newTask);
+            }
+            else
+            {
+                mainApplication.getTaskObservableList().add(newTask);
+            }
         }
     }
 
@@ -80,7 +87,7 @@ public class TaskController
     @FXML
     private void handleShowDeletedItems()
     {
-        tableView.setItems(tasksDeletedList);
+        tableView.setItems(mainApplication.getTasksDeletedList());
     }
 
     @FXML
@@ -100,9 +107,15 @@ public class TaskController
         }
         else
         {
-            tasksDeletedList.add(userDeleteItem);
+            mainApplication.getTasksDeletedList().add(userDeleteItem);
             tableView.getItems().remove(userDeleteItem);
         }
+    }
+
+    @FXML
+    private void handleShowPriority()
+    {
+        tableView.setItems(mainApplication.getTasksPriorityList());
     }
 
 }

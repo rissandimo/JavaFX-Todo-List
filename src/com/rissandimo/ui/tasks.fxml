@@ -42,7 +42,7 @@
                   <FontAwesomeIconView glyphName="CHECK_SQUARE_ALT" size="25" />
                </graphic>
             </Label>
-            <Label prefHeight="51.0" prefWidth="204.0" text="Priority">
+            <Label onMouseClicked="#handleShowPriority" prefHeight="51.0" prefWidth="204.0" text="Priority">
                <graphic>
                   <FontAwesomeIconView glyphName="BELL" size="25" />
                </graphic>
