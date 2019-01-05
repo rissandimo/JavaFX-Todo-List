@@ -2,6 +2,8 @@ package com.rissandimo.controllers;
 
 import com.rissandimo.MainApplication;
 import com.rissandimo.util.AlertUtil;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,6 +31,8 @@ public class TaskController
 
     private MainApplication mainApplication;
 
+    private ObservableList<Task> tasksDeletedList = FXCollections.observableArrayList();
+
 
     public void giveAccessToTaskController(MainApplication mainApplication)
     {
@@ -55,7 +59,6 @@ public class TaskController
         if(okClicked)
         {
         mainApplication.getTaskObservableList().add(newTask);
-
         }
     }
 
@@ -72,6 +75,34 @@ public class TaskController
             AlertUtil.showWarning("No task chosen", "Please select a task to edit");
         }
         //TODO - reload table view to show edited task
+    }
+
+    @FXML
+    private void handleShowDeletedItems()
+    {
+        tableView.setItems(tasksDeletedList);
+    }
+
+    @FXML
+    private void handleShowAllItems()
+    {
+        tableView.setItems(mainApplication.getTaskObservableList());
+    }
+
+    @FXML
+    private void handleDelete()
+    {
+        Task userDeleteItem = tableView.getSelectionModel().getSelectedItem();
+
+        if(userDeleteItem == null)
+        {
+          AlertUtil.showWarning("Warning", "You must select a task to delete");
+        }
+        else
+        {
+            tasksDeletedList.add(userDeleteItem);
+            tableView.getItems().remove(userDeleteItem);
+        }
     }
 
 }
